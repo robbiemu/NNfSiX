@@ -27,9 +27,9 @@ public class NNfS {
 
             let r = Array(count: points, generating: { n in Double(n)/Double(points) }) // radius
                         
-            let tl = Array(count: points, generating: { n in Double(n)/Double(points) * 4.0 + Double(classNumber) })
+            let tl = Array<Double>(count: points, generating: { n -> Double in Double(n)/Double(points) * 4.0 + Double(classNumber) })
             let tr = Array(count: points, generating: { _ in Double(rd.nextUniform()) * 0.2 })
-            let t = tl.add(tr)!
+            let t:[Double] = tl.add(tr)!
                                     
             let rSin:[Double] = r.mul(sin(radians: t.mul(2.5)))!
             let rCos:[Double] = r.mul(cos(radians: t.mul(2.5)))!
