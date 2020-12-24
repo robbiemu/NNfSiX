@@ -53,9 +53,10 @@ class SoftMax: Activation {
 
     public func forward(inputs:[[Double]]) {
         // exp(inputs - inputs.max)
-        let exp_values:[[Double]] = zip(inputs, inputs.map { $0.max()! })
+        let exp_values = zip(inputs, inputs.map { $0.max()! })
             .map{ (input, max) in input.map { value in exp(value - max) } }
         
+        // exp_values/exp_values.sum
         self.output = zip(exp_values, exp_values.map { row in row.reduce(0,+) })
             .map { (row, sum) in row.map { value in value/sum }}
     }
@@ -73,4 +74,5 @@ activation1.forward(inputs: layer1.output)
 
 layer2.forward(inputs: activation1.output)
 activation2.forward(inputs: layer2.output)
+
 print(activation2.output)
